@@ -2,7 +2,7 @@
 // @name        Tumblr - Change default blog
 // @namespace   yshi
 // @include     https://www.tumblr.com/*
-// @version     1
+// @version     1.0.1
 // @description Changes the default blog to one of your secondary blogs when posting/reblogging stuff. 
 // @grant       none
 // ==/UserScript==
@@ -17,8 +17,14 @@ var $ = unsafeWindow.jQuery;
 
 var changeDefault = (function(){
     secondaryBlog = $('div[data-option-value=' + defaultBlogDataOptionValue + ']');
+    currentChannelId = document.getElementById('channel_id');
     
-    if(secondaryBlog.length > 0){
+    if(currentChannelId === null)
+    {
+       return;        
+    }
+    
+    if(secondaryBlog.length > 0 && currentChannelId.value.toLowerCase() !== defaultBlogDataOptionValue.toLowerCase()){
       secondaryBlog.click();
     }
 });
