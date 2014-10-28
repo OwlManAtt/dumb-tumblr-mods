@@ -2,7 +2,7 @@
 // @name        Tumblr - Change default blog
 // @namespace   yshi
 // @include     https://www.tumblr.com/*
-// @version     1.0.1
+// @version     1.0.2
 // @description Changes the default blog to one of your secondary blogs when posting/reblogging stuff. 
 // @grant       none
 // ==/UserScript==
@@ -19,8 +19,7 @@ var changeDefault = (function(){
     secondaryBlog = $('div[data-option-value=' + defaultBlogDataOptionValue + ']');
     currentChannelId = document.getElementById('channel_id');
     
-    if(currentChannelId === null)
-    {
+    if(currentChannelId === null){
        return;        
     }
     
@@ -38,11 +37,12 @@ var observeDOM = (function(){
         if( MutationObserver ){
             // define a new observer
             var obs = new MutationObserver(function(mutations, observer){
-                if( mutations[0].addedNodes.length || mutations[0].removedNodes.length )
+                if( mutations[0].addedNodes.length || mutations[0].removedNodes.length ){
                     // Disable for the duration of the callback so we can mutate the page without self-notifying
                     obs.disconnect();
                     callback();
                     obs.observe( obj, { childList:true, subtree:true });
+                }
             });
             // have the observer observe foo for changes in children
             obs.observe( obj, { childList:true, subtree:true });
